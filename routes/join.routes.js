@@ -6,16 +6,16 @@ const joinRouter = express.Router();
 //post with secret code if match seucuces message with
 // autentcateion
 //
-//get reder form
+//get render form
 joinRouter.get("/", (req, res) => {
   res.render("joinform");
 });
-const secretCode = "SECRET123";
+
 // post the messages with sanitizations
 joinRouter.post("/", async (req, res) => {
   // now let us check the req inputs
   const { secret } = req.body;
-  if (secret === secretCode) {
+  if (secret === process.env.CLUB_SECRET) {
     const result = await upgradeUser(req.user.id, "member");
     //toggle is memeebr "true" from database and redirect
     req.session.messages = ["You are now club memeber"];

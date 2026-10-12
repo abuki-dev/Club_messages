@@ -11,12 +11,11 @@ const adminRouet = express.Router();
 adminRouet.get("/", (req, res) => {
   res.render("adminform", { message: [] });
 });
-const secretCode = "Amin123";
 // post the messages with sanitizations
 adminRouet.post("/", async (req, res) => {
   // now let us check the req inputs
   const { secret } = req.body;
-  if (secret === secretCode) {
+  if (secret === process.env.ADMIN_SECRET) {
     //toggle is memeebr "true" from database and redirect
     req.session.messages = ["You are now Admin"];
     const result = await upgradeUser(req.user.id, "admin");
