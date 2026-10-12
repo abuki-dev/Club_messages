@@ -7,6 +7,7 @@ const {
   findById,
   findByemailorUsername,
 } = require("../models/user.model");
+const e = require("express");
 passportjs.use(
   new Localstrategy(
     { usernameField: "login" },
@@ -29,10 +30,13 @@ passportjs.use(
         if (isMatch) {
           return done(null, isUserfounded);
         }
+
+        //
         console.log("after compare");
         done(null, false, {
           message: "Error the password is not correct try agan ",
         });
+        //
       } catch (error) {
         console.log("insode the error");
         return done(null, false, { message: error.message });
@@ -54,4 +58,16 @@ passportjs.deserializeUser(async (id, done) => {
   }
 });
 
-module.exports = { passportjs };
+async function logout(req, res, next) {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    req.session.destroy(() => {
+      res.clearCookie("connect.sid");
+      res.redirect("/login");
+    });
+  });
+}
+
+module.exports = { passportjs, logout };
