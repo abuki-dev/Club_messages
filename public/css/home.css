@@ -1,0 +1,84 @@
+.home {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 40px 16px 56px;
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.hero h1 {
+  margin: 0 0 8px;
+  font-size: 2rem;
+  letter-spacing: -0.01em;
+}
+
+.hero .logo {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 14px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: var(--accent);
+  color: #fff;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.btn-link {
+  display: inline-block;
+  width: auto;
+  min-width: 140px;
+  margin-top: 0;
+  text-align: center;
+  text-decoration: none;
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+
+.btn-outline:hover {
+  background: rgba(36, 70, 201, 0.08);
+}
+
+.messages {
+  display: grid;
+  gap: 16px;
+}
+
+.message {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: 10px;
+  padding: 18px 20px;
+  box-shadow: 0 4px 14px rgba(23, 35, 59, 0.05);
+}
+
+.message h2 {
+  margin: 0 0 6px;
+  font-size: 1.1rem;
+}
+
+.message p {
+  margin: 0;
+  color: var(--muted);
+  white-space: pre-line;
+}
+
+.empty {
+  text-align: center;
+  color: var(--muted);
+}
