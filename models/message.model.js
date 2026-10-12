@@ -10,7 +10,7 @@ async function onlyMessage() {
 }
 async function insertBody(body) {
   const result = await pool.query(
-    `insert into messages (title, body, author_id) values ($1, $2, $3) returning title`,
+    `insert into messages (title, body, author_id,author) values ($1, $2, $3,$4) returning title`,
     body,
   );
   return result.rows;
