@@ -1,5 +1,5 @@
 const express = require("express");
-const { passportjs } = require("./passport");
+const { passportjs } = require("./auth.passport");
 const { rateLimit } = require("express-rate-limit");
 const singinrouter = express.Router();
 
@@ -12,7 +12,7 @@ singinrouter.post(
   "/",
   loginlimiter,
   passportjs.authenticate("local", {
-    successRedirect: "/home",
+    successRedirect: "/messages",
     failureRedirect: "/login",
     failureMessage: true,
   }),
@@ -21,7 +21,9 @@ singinrouter.post(
 singinrouter.get("/", (req, res) => {
   const messages = req.session.messages || [];
   req.session.messages = [];
-  res.render("signin", { errors: [""] });
+  console.log(messages);
+  res.render("login", { errors: messages });
+  //res.json({messages})
 });
 
 module.exports = { singinrouter };
