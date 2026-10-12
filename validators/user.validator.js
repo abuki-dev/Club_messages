@@ -5,7 +5,6 @@ const nameValidations = [
     .trim()
     .notEmpty()
     .withMessage("Error Name filed is empty")
-    .isAlpha()
     .withMessage("name field Only letters are allowed i"),
 ];
 
@@ -29,7 +28,7 @@ const passwordConfirmation = [
     .custom((value, { req }) => {
       return value === req.body.password;
     })
-    .withMessage("Error the passwords are not same")
+    .withMessage("Error the passwords are not same"),
 ];
 
 module.exports = {
