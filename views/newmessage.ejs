@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Write message</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/home.css">
+  <link rel="stylesheet" href="/css/messages.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a href="/messages" class="topbar-brand">
+        <span class="topbar-logo" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 3h9l4 4v14H6z"/>
+            <path d="M15 3v4h4"/>
+            <path d="M9 12h7M9 16h7"/>
+          </svg>
+        </span>
+        Notes
+      </a>
+
+      <nav class="topbar-nav" aria-label="Main">
+        <a href="/admin" class="nav-btn">Join admin</a>
+        <a href="/join" class="nav-btn">Join room</a>
+        <a href="/messages" class="nav-btn">Messages</a>
+        <form action="/logout" method="POST" class="inline-form">
+          <button type="submit" class="nav-btn nav-btn-danger">Log out</button>
+        </form>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page page-top">
+    <section class="card card-wide">
+      <header class="brand">
+        <h1>Write a message</h1>
+        <p class="tagline">It will be posted anonymously.</p>
+      </header>
+
+      <% if (typeof message !== 'undefined' && message) { %>
+        <div class="alert alert-success" role="status">
+          <%= message %>
+        </div>
+      <% } %>
+
+      <% if (typeof errors !== 'undefined' && errors && errors.length > 0) { %>
+        <div class="alert alert-error" role="alert">
+          <ul>
+            <% errors.forEach(function (error) { %>
+              <li><%= typeof error === 'string' ? error : error.msg %></li>
+            <% }) %>
+          </ul>
+        </div>
+      <% } %>
+
+      <form action="/messages/new" method="POST" novalidate>
+        <div class="field">
+          <label for="title">Title</label>
+          <input type="text" id="title" name="title" maxlength="100" placeholder="Give your message a title"
+                 value="<%= typeof title !== 'undefined' ? title : '' %>" required autofocus>
+        </div>
+
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="6" maxlength="1000"
+                    placeholder="Write your message here" required><%= typeof body !== 'undefined' ? body : '' %></textarea>
+        </div>
+
+        <button type="submit" class="btn">Post message</button>
+      </form>
+
+      <p class="switch"><a href="/messages">Back to messages</a></p>
+    </section>
+  </main>
+</body>
+</html>

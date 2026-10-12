@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Notes</title>
+  <link rel="stylesheet" href="/css/register.css">
+  <link rel="stylesheet" href="/css/home.css">
+</head>
+<body>
+  <main class="home">
+    <header class="hero">
+      <div class="logo" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 3h9l4 4v14H6z"/>
+          <path d="M15 3v4h4"/>
+          <path d="M9 12h7M9 16h7"/>
+        </svg>
+      </div>
+      <h1>Your notes, anywhere</h1>
+      <p class="tagline">Read what others have shared, then join to keep your own notes.</p>
+      <div class="actions">
+        <a href="/register" class="btn btn-link">Create account</a>
+        <a href="/login" class="btn btn-link btn-outline">Log in</a>
+      </div>
+    </header>
+
+    <section class="messages" aria-label="Messages">
+      <% if (typeof messages !== 'undefined' && messages && messages.length > 0) { %>
+        <% messages.forEach(function (msg) { %>
+          <article class="message">
+            <h2><%= msg.title %></h2>
+            <p><%= msg.body %></p>
+          </article>
+        <% }) %>
+      <% } else { %>
+        <p class="empty">No messages yet.</p>
+      <% } %>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Messages</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/home.css">
+  <link rel="stylesheet" href="/css/messages.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a href="/messages" class="topbar-brand">
+        <span class="topbar-logo" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 3h9l4 4v14H6z"/>
+            <path d="M15 3v4h4"/>
+            <path d="M9 12h7M9 16h7"/>
+          </svg>
+        </span>
+        Notes
+      </a>
+
+      <nav class="topbar-nav" aria-label="Main">
+        <a href="/admin" class="nav-btn">Join admin</a>
+        <a href="/join" class="nav-btn">Join room</a>
+        <form action="/logout" method="POST" class="inline-form">
+          <button type="submit" class="nav-btn nav-btn-danger">Log out</button>
+        </form>
+      </nav>
+    </div>
+  </header>
+
+  <main class="home">
+    <div class="board-head">
+      <h1>Messages</h1>
+      <a href="/messages/new" class="btn btn-link">Write message</a>
+    </div>
+
+    <section class="messages" aria-label="Messages">
+      <% if (typeof messages !== 'undefined' && messages && messages.length > 0) { %>
+        <% messages.forEach(function (msg) { %>
+          <article class="message">
+            <h2><%= msg.title %></h2>
+            <p class="author">
+              By <%= msg.author || 'Unknown' %>
+              <% if (msg.created_at) { %>
+                &middot; <time datetime="<%= new Date(msg.created_at).toISOString() %>">
+                  <%= new Date(msg.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) %>
+                </time>
+              <% } %>
+            </p>
+            <p><%= msg.body %></p>
+          </article>
+        <% }) %>
+      <% } else { %>
+        <p class="empty">No messages yet. Be the first to write one.</p>
+      <% } %>
+    </section>
+  </main>
+</body>
+</html>

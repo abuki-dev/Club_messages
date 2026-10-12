@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Create account</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <main class="page">
+    <section class="card">
+      <header class="brand">
+        <div class="logo" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 3h9l4 4v14H6z"/>
+            <path d="M15 3v4h4"/>
+            <path d="M9 12h7M9 16h7"/>
+          </svg>
+        </div>
+        <h1>Access your notes</h1>
+        <p class="tagline">Create a new account to access your Messages.</p>
+      </header>
+
+      <% if (typeof message !== 'undefined' && message) { %>
+        <div class="alert alert-success" role="status">
+          <%= message %>
+        </div>
+      <% } %>
+
+      <% if (typeof errors !== 'undefined' && errors && errors.length > 0) { %>
+        <div class="alert alert-error" role="alert">
+          <ul>
+            <% errors.forEach(function (error) { %>
+              <li><%= typeof error === 'string' ? error : error.msg %></li>
+            <% }) %>
+          </ul>
+        </div>
+      <% } %>
+
+      <form action="/register" method="POST" novalidate>
+        <div class="field">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" autocomplete="name" placeholder="Your full name"
+                 value="<%= typeof name !== 'undefined' ? name : '' %>" required>
+        </div>
+
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" autocomplete="email" placeholder="you@example.com"
+                 value="<%= typeof email !== 'undefined' ? email : '' %>" required>
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" autocomplete="new-password"
+                 placeholder="At least 6 characters" required>
+        </div>
+
+        <div class="field">
+          <label for="confirmpassword">Confirm password</label>
+          <input type="password" id="confirmpassword" name="confirmpassword" autocomplete="new-password"
+                 placeholder="Repeat your password" required>
+        </div>
+
+        <button type="submit" class="btn">Create account</button>
+      </form>
+
+      <p class="switch">Already have an account? <a href="/login">Log in</a></p>
+    </section>
+  </main>
+</body>
+</html>

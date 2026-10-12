@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin access</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <main class="page">
+    <section class="card">
+      <header class="brand">
+        <div class="logo" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="5" y="11" width="14" height="9" rx="2"/>
+            <path d="M8 11V8a4 4 0 0 1 8 0v3"/>
+          </svg>
+        </div>
+        <h1>Admin access</h1>
+        <p class="tagline">Enter the secret to continue.</p>
+      </header>
+
+      <% if (typeof message !== 'undefined' && message) { %>
+        <div class="alert alert-success" role="status">
+          <%= message %>
+        </div>
+      <% } %>
+
+      <% if (typeof errors !== 'undefined' && errors && errors.length > 0) { %>
+        <div class="alert alert-error" role="alert">
+          <ul>
+            <% errors.forEach(function (error) { %>
+              <li><%= typeof error === 'string' ? error : error.msg %></li>
+            <% }) %>
+          </ul>
+        </div>
+      <% } %>
+
+      <form action="/admin" method="POST" novalidate>
+        <div class="field">
+          <label for="secret">Secret</label>
+          <input type="password" id="secret" name="secret" autocomplete="off"
+                 placeholder="Enter admin secret" required autofocus>
+        </div>
+
+        <button type="submit" class="btn">Submit</button>
+      </form>
+    </section>
+  </main>
+</body>
+</html>
