@@ -15,7 +15,7 @@ const { logout } = require("./auth/auth.passport");
 const app = express();
 const PORT = process.env.APP_PORT;
 // first let us setup or helmet to the app
-//app.use(helmet());
+app.use(helmet());
 app.use(morgan("dev"));
 app.use(
   session({
@@ -25,7 +25,7 @@ app.use(
     cookie: {
       httpOnly: true,
       maxAge: 15 * 60 * 1000,
-      secure: false,
+      secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
     },
   }),
@@ -65,5 +65,5 @@ app.use("/join", joinRouter);
 app.use("/admin", adminRouet);
 app.use("/logout", logout);
 app.listen(PORT, () => {
-  console.log("successfully done");
+  console.log(`The server is running on port http://localhost:${PORT}`);
 });
